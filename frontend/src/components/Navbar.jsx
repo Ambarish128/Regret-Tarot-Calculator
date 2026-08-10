@@ -36,28 +36,30 @@ export default function Navbar() {
     },
   ];
 
-  // Dynamic Theme Palette Engine for Logo
+  // Distinct Color Palette Engine
   const getLogoTheme = () => {
     switch (pathname) {
       case '/divination':
         return {
           container: 'bg-[#F59E0B]/15 border-[#F59E0B]/60 shadow-[0_0_25px_rgba(245,158,11,0.45)]',
-          starColor: 'text-[#FFD700] fill-[#FFD700] drop-shadow-[0_0_8px_rgba(255,215,0,0.8)]'
+          // Electric Violet Star (#A855F7) on Golden Amber — pops without colliding with Home Cyan
+          starColor: 'text-[#A855F7] fill-[#A855F7] drop-shadow-[0_0_10px_rgba(168,85,247,0.9)]'
         };
       case '/readings':
         return {
           container: 'bg-[#8B0000]/20 border-[#8B0000]/70 shadow-glow-red',
-          starColor: 'text-[#FF2A2A] fill-[#FF2A2A] drop-shadow-[0_0_8px_rgba(255,42,42,0.8)]'
+          starColor: 'text-[#FF8C00] fill-[#FF8C00] drop-shadow-[0_0_10px_rgba(255,140,0,0.9)]'
         };
       case '/grimoire':
         return {
           container: 'bg-[#10B981]/15 border-[#10B981]/60 shadow-[0_0_25px_rgba(16,185,129,0.45)]',
-          starColor: 'text-[#34D399] fill-[#34D399] drop-shadow-[0_0_8px_rgba(52,211,153,0.8)]'
+          starColor: 'text-[#F43F5E] fill-[#F43F5E] drop-shadow-[0_0_10px_rgba(244,63,94,0.9)]'
         };
       default:
         return {
           container: 'bg-[#7C3AED]/10 border-[#7C3AED]/40 shadow-glow-purple',
-          starColor: 'text-[#FF4D4D] fill-[#FF4D4D] drop-shadow-[0_0_8px_rgba(255,77,77,0.8)]'
+          // Cyber Cyan Star (#00F0FF) reserved for Home
+          starColor: 'text-[#00F0FF] fill-[#00F0FF] drop-shadow-[0_0_10px_rgba(0,240,255,0.9)]'
         };
     }
   };
@@ -68,7 +70,7 @@ export default function Navbar() {
     <header className="sticky top-0 z-50 bg-[#0A090D]/90 backdrop-blur-md border-b border-[#7C3AED]/20 px-4 md:px-8 py-3">
       <div className="max-w-7xl mx-auto flex items-center justify-between">
         
-        {/* Brand Logo - Fully Synced Pulsing Star & Container Aura */}
+        {/* Brand Logo - Electric Violet Star on Golden Amber Container */}
         <Link 
           href="/" 
           className={`group flex items-center gap-2.5 text-white px-3.5 py-1.5 rounded-xl border animate-pulse transition-all duration-500 ${logoTheme.container}`}
