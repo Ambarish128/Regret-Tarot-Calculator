@@ -2,10 +2,11 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
 import { Flame, Skull, ArrowRight, Sparkles, RotateCw, Shuffle, Sun, Compass } from 'lucide-react';
+import { useAuth } from '@/context/AuthContext';
 
-// Deck of Tarot Cards with distinct themes, meanings, and remedies
 const TAROT_DECK = [
   {
     id: 'eight-of-cups',
@@ -58,6 +59,8 @@ const TAROT_DECK = [
 ];
 
 export default function Home() {
+  const router = useRouter();
+  const { isAuthenticated } = useAuth();
   const [isFlipped, setIsFlipped] = useState(false);
   const [currentCardIndex, setCurrentCardIndex] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
@@ -111,6 +114,16 @@ export default function Home() {
     }
   };
 
+  // Auth navigation handler aligned with app authentication state
+  const handleCalculateClick = (e) => {
+    e.preventDefault();
+    if (!isAuthenticated) {
+      router.push('/auth?redirectTo=/calculator');
+    } else {
+      router.push('/calculator');
+    }
+  };
+
   return (
     <div className="px-4 py-6 md:px-12 md:py-10 relative overflow-hidden">
       {/* Background Ambiance */}
@@ -145,13 +158,13 @@ export default function Home() {
 
               <div className="flex flex-col sm:flex-row gap-4 pt-4">
                 <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
-                  <Link 
-                    className="inline-flex items-center justify-center gap-3 bg-[#8B0000] hover:bg-[#8B0000]/80 text-white font-bold text-base px-8 py-4 rounded-xl border border-[#8B0000] shadow-glow-red hover:shadow-occult transition-all duration-300 w-full sm:w-auto" 
-                    href="/divination"
+                  <button 
+                    onClick={handleCalculateClick}
+                    className="inline-flex items-center justify-center gap-3 bg-[#8B0000] hover:bg-[#8B0000]/80 text-white font-bold text-base px-8 py-4 rounded-xl border border-[#8B0000] shadow-glow-red hover:shadow-occult transition-all duration-300 w-full sm:w-auto cursor-pointer"
                   >
                     <span>Calculate My Regret</span>
                     <ArrowRight className="w-5 h-5"/>
-                  </Link>
+                  </button>
                 </motion.div>
 
                 <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
@@ -165,9 +178,8 @@ export default function Home() {
               </div>
             </div>
 
-            {/* RESTORED CLEAN TAROT CARD DESIGN */}
+            {/* TAROT CARD DISPLAY */}
             <div id="tarot-cards" className="lg:col-span-5 flex flex-col items-center justify-center space-y-4">
-              
               <div 
                 className="w-64 h-[380px] cursor-pointer perspective-1000"
                 onClick={handleCardClick}
@@ -178,7 +190,7 @@ export default function Home() {
                   transition={{ duration: 0.6, ease: [0.23, 1, 0.32, 1] }}
                 >
                   
-                  {/* FACE DOWN - Clean Minimalist Dark Card Back */}
+                  {/* FACE DOWN */}
                   <div className="absolute inset-0 w-full h-full rounded-2xl bg-gradient-to-b from-[#1C1826] to-[#0D0B12] border-2 border-[#3B3548] p-5 flex flex-col justify-between items-center shadow-2xl backface-hidden">
                     <div className="w-full border border-[#3B3548]/50 h-full rounded-xl p-4 flex flex-col justify-between items-center bg-[radial-gradient(#2A2634_1px,transparent_1px)] [background-size:12px_12px]">
                       <div className="text-[10px] font-mono tracking-widest text-[#A78BFA] uppercase">
@@ -196,7 +208,7 @@ export default function Home() {
                     </div>
                   </div>
 
-                  {/* FACE UP - Clean Dark Reading Front */}
+                  {/* FACE UP */}
                   <div className="absolute inset-0 w-full h-full rounded-2xl bg-gradient-to-b from-[#1E1220] via-[#14121A] to-[#0A090D] border-2 border-[#8B0000] p-5 flex flex-col justify-between shadow-2xl rotate-y-180 backface-hidden">
                     
                     <div className="flex justify-between items-center text-[#A78BFA] font-mono text-[10px] tracking-widest uppercase">
@@ -246,7 +258,6 @@ export default function Home() {
 
         {/* ================= FEATURES SECTION ================= */}
         <section id="how-it-works" className="space-y-10">
-          
           <div className="text-center max-w-2xl mx-auto space-y-2">
             <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight text-white">
               The Remediation Engine
@@ -257,8 +268,6 @@ export default function Home() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
-            
-            {/* Feature 1 */}
             <motion.div 
               whileHover={{ y: -4 }}
               transition={{ duration: 0.2 }}
@@ -280,7 +289,6 @@ export default function Home() {
               </div>
             </motion.div>
 
-            {/* Feature 2 */}
             <motion.div 
               whileHover={{ y: -4 }}
               transition={{ duration: 0.2 }}
@@ -302,7 +310,6 @@ export default function Home() {
               </div>
             </motion.div>
 
-            {/* Feature 3 */}
             <motion.div 
               whileHover={{ y: -4 }}
               transition={{ duration: 0.2 }}
@@ -323,7 +330,6 @@ export default function Home() {
                 </span>
               </div>
             </motion.div>
-
           </div>
         </section>
 
