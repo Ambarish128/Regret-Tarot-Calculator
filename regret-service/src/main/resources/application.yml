@@ -11,7 +11,7 @@ spring:
 eureka:
   client:
     service-url:
-      defaultZone: http://localhost:8761/eureka/
+      defaultZone: http://eureka-server:8761/eureka/
 chain-service:
   # This service deliberately does not register with Eureka.
   base-url: ${CHAIN_SERVICE_URL:http://localhost:8000}

@@ -15,13 +15,19 @@ spring:
           predicates: [ Path=/api/auth/** ]
         - id: regret-service
           uri: lb://regret-service
-          predicates: [ Path=/api/regrets/**, /api/tarot/** ]
+          predicates:
+            - Path=/api/regrets/**, /api/tarot/**
+          filters:
+            - JwtAuthenticationFilter
 eureka:
   client:
     service-url:
-      defaultZone: http://localhost:8761/eureka/
+      defaultZone: http://eureka-server:8761/eureka/
 management:
   endpoints:
     web:
       exposure:
         include: health,info
+
+jwt:
+  secret: ${APP_JWT_SECRET:change-this-development-secret-to-a-long-random-value}
