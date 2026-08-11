@@ -1,0 +1,17 @@
+server:
+  port: 8082
+spring:
+  application:
+    name: regret-service
+  datasource:
+    url: jdbc:h2:mem:regretdb
+  jpa:
+    hibernate:
+      ddl-auto: update
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka-server:8761/eureka/
+chain-service:
+  # This service deliberately does not register with Eureka.
+  base-url: ${CHAIN_SERVICE_URL:http://localhost:8000}

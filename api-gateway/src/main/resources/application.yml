@@ -1,0 +1,33 @@
+server:
+  port: 8080
+spring:
+  application:
+    name: api-gateway
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
+      routes:
+        - id: auth-service
+          uri: lb://auth-service
+          predicates: [ Path=/api/auth/** ]
+        - id: regret-service
+          uri: lb://regret-service
+          predicates:
+            - Path=/api/regrets/**, /api/tarot/**
+          filters:
+            - JwtAuthenticationFilter
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka-server:8761/eureka/
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+
+jwt:
+  secret: ${APP_JWT_SECRET:change-this-development-secret-to-a-long-random-value}
