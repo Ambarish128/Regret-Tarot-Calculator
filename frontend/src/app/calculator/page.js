@@ -58,13 +58,12 @@ export default function CalculatorPage() {
     };
 
     try {
-      // 1. Submit inputs to POST /api/regret/analyze
-      const analyzeData = await apiFetch('/regret/analyze', {
+      // POST request sent to http://localhost:8080/api/regrets/analyze via Gateway
+      const analyzeData = await apiFetch('/regrets/analyze', {
         method: 'POST',
         body: JSON.stringify(payload),
       });
 
-      // 2. Save result to local history
       const saved = saveCalculationResult({
         decision,
         price: payload.price,
@@ -73,36 +72,12 @@ export default function CalculatorPage() {
         ...analyzeData,
       });
 
-      // 3. Navigate directly to result view
-      router.push(`/result/${saved.id}`);
+      router.push(`/result/${saved.id || saved.calculationId}`);
     } catch (err) {
-      console.warn('Backend unavailable, generating local fallback:', err);
-
-      const normalizedMood = payload.mood.toLowerCase();
-      const mockResult = {
-        id: `calc_${Date.now()}`,
-        decision,
-        price: payload.price,
-        mood: payload.mood,
-        trigger: payload.trigger,
-        regret_score: Math.min(
-          100,
-          Math.round(
-            ((payload.price || 0) > 100 ? 45 : 20) +
-              (normalizedMood.includes('anxious') || normalizedMood.includes('stressed') ? 30 : 15)
-          )
-        ),
-        verdict: 'High Risk of Regret',
-        reasoning: `Purchasing "${decision}" while feeling "${payload.mood}" presents elevated emotional impulse risk.`,
-        risk_factors: [
-          `Emotional state ("${payload.mood}") skewing perceived urgency`,
-          payload.trigger ? `Trigger factor: "${payload.trigger}"` : 'Unspecified decision trigger',
-          payload.price ? `Financial commitment: $${payload.price}` : 'Unpriced commitment',
-        ],
-      };
-
-      const saved = saveCalculationResult(mockResult);
-      router.push(`/result/${saved.id}`);
+      console.error('Backend analysis request failed:', err);
+      setError(
+        err.message || 'Unable to connect to the Orakle service. Please ensure all backend microservices are running.'
+      );
     } finally {
       setIsSubmitting(false);
     }

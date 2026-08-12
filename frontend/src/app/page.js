@@ -14,7 +14,7 @@ const TAROT_DECK = [
     number: 'VIII',
     tag: 'Remediation Arcana',
     insight: 'Walking away from depleted situations to seek higher emotional alignment.',
-    action: 'Pivot focus away from sunk costs and execute a strategic departure.'
+    action: 'Pivot focus away from sunk costs and execute a strategic departure.',
   },
   {
     id: 'the-tower',
@@ -22,7 +22,7 @@ const TAROT_DECK = [
     number: 'XVI',
     tag: 'Origin Arcana',
     insight: 'Unforeseen structural breakdown that shattered initial false assumptions.',
-    action: 'Embrace the clean slate—stop rebuilding what was meant to fall.'
+    action: 'Embrace the clean slate—stop rebuilding what was meant to fall.',
   },
   {
     id: 'the-fool',
@@ -30,7 +30,7 @@ const TAROT_DECK = [
     number: '0',
     tag: 'Initiation Arcana',
     insight: 'Standing at the edge of uncertainty with uncalculated potential ahead.',
-    action: 'Take the leap without waiting for complete certainty or consensus.'
+    action: 'Take the leap without waiting for complete certainty or consensus.',
   },
   {
     id: 'judgement',
@@ -38,7 +38,7 @@ const TAROT_DECK = [
     number: 'XX',
     tag: 'Reckoning Arcana',
     insight: 'Self-evaluation and the imperative call to forgive past missteps.',
-    action: 'Release old self-blame and accept the permanent lessons learned.'
+    action: 'Release old self-blame and accept the permanent lessons learned.',
   },
   {
     id: 'wheel-of-fortune',
@@ -46,7 +46,7 @@ const TAROT_DECK = [
     number: 'X',
     tag: 'Cycles Arcana',
     insight: 'Shifting momentum outside direct control; a turning point in circumstances.',
-    action: 'Adapt quickly to current momentum rather than fighting current tides.'
+    action: 'Adapt quickly to current momentum rather than fighting current tides.',
   },
   {
     id: 'the-hermit',
@@ -54,8 +54,8 @@ const TAROT_DECK = [
     number: 'IX',
     tag: 'Introspection Arcana',
     insight: 'The need for solitary analysis away from external opinions and noise.',
-    action: 'Pause external inputs for 48 hours to recalibrate your internal compass.'
-  }
+    action: 'Pause external inputs for 48 hours to recalibrate your internal compass.',
+  },
 ];
 
 export default function Home() {
@@ -114,7 +114,6 @@ export default function Home() {
     }
   };
 
-  // Auth navigation handler aligned with app authentication state
   const handleCalculateClick = (e) => {
     e.preventDefault();
     if (!isAuthenticated) {
