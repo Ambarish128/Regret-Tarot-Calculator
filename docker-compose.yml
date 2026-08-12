@@ -1,21 +1,29 @@
 services:
   eureka-server:
-    build: ./eureka-server
+    build:
+      context: .
+      dockerfile: eureka-server/Dockerfile
     ports: ["8761:8761"]
   api-gateway:
-    build: ./api-gateway
+    build:
+      context: .
+      dockerfile: api-gateway/Dockerfile
     ports: ["8080:8080"]
     depends_on: [eureka-server]
     environment:
       SPRING_EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-server:8761/eureka/
   auth-service:
-    build: ./auth-service
+    build:
+      context: .
+      dockerfile: auth-service/Dockerfile
     ports: ["8081:8081"]
     depends_on: [eureka-server]
     environment:
       SPRING_EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-server:8761/eureka/
   regret-service:
-    build: ./regret-service
+    build:
+      context: .
+      dockerfile: regret-service/Dockerfile
     ports: ["8082:8082"]
     depends_on: [eureka-server, python-chain-service]
     environment:

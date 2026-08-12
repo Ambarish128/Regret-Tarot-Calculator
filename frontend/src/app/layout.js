@@ -4,7 +4,7 @@ import { AuthProvider } from '@/context/AuthContext';
 import Navbar from '@/components/Navbar';
 
 export const metadata = {
-  title: 'Mystic Realm',
+  title: 'Regret Orakle',
   description: 'Your mystical portal',
 };
 

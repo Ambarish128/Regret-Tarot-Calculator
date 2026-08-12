@@ -4,17 +4,23 @@ const HISTORY_KEY = 'regret_analysis_history';
 const CURRENT_RESULT_KEY = 'regret_analysis_result';
 
 export function saveCalculationResult(resultData) {
-  if (typeof window === 'undefined') return;
+  if (typeof window === 'undefined') return {};
+
+  const id = resultData.id || resultData.calculationId || `calc_${Date.now()}`;
 
   const entry = {
-    id: resultData.id || `calc_${Date.now()}`,
+    id,
     decision: resultData.decision || 'Untitled Decision',
-    regret_score: resultData.regret_score ?? 0,
+    price: resultData.price ?? null,
+    mood: resultData.mood || '',
+    trigger: resultData.trigger || null,
+    regret_score: resultData.regret_score ?? resultData.regretScore ?? 0,
     verdict: resultData.verdict || 'Undetermined',
     reasoning: resultData.reasoning || '',
-    risk_factors: resultData.risk_factors || [],
+    risk_factors: resultData.risk_factors || resultData.riskFactors || [],
     tarot: resultData.tarot || null,
     remedies: resultData.remedies || [],
+    createdAt: resultData.createdAt || new Date().toISOString(),
     date: new Date().toLocaleDateString('en-US', {
       month: 'short',
       day: 'numeric',
@@ -43,6 +49,18 @@ export function getCalculationHistory() {
     console.error('Failed to parse history from localStorage', e);
     return [];
   }
+}
+
+export function getCalculationResultById(id) {
+  if (typeof window === 'undefined') return null;
+
+  if (id === 'current') {
+    const current = localStorage.getItem(CURRENT_RESULT_KEY);
+    return current ? JSON.parse(current) : null;
+  }
+
+  const history = getCalculationHistory();
+  return history.find((item) => String(item.id) === String(id)) || null;
 }
 
 export function clearCalculationHistory() {

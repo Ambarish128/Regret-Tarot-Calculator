@@ -81,7 +81,7 @@ export default function Navbar() {
           className={`group flex items-center gap-2.5 text-white px-3.5 py-1.5 rounded-xl border animate-pulse transition-all duration-500 ${logoTheme.container}`}
         >
           <Sparkles className={`w-5 h-5 transition-transform duration-300 group-hover:scale-125 ${logoTheme.starColor}`} />
-          <span className="font-bold tracking-wider text-lg text-[#E2E8F0]">Orakle</span>
+          <span className="font-bold tracking-wider text-lg text-[#E2E8F0]">Regret Orakle</span>
         </Link>
 
         {/* Desktop Navigation Links */}
