@@ -1,25 +1,3 @@
-Here are the updated LinkedIn posts and `README.md` file, explicitly highlighting that **the project is actively ongoing and currently under development** beyond its hackathon roots.
-
----
-
-## 📱 Updated LinkedIn Post (Ongoing Development)
-
-> Ever spent $400 on something at 2 AM just because you had a stressful day and your brain went offline?
-> That exact problem kicked off **Regret Oracle** — a project we started at the UTS ProgSoC hackathon and are now actively building out!
-> The theme was to take an absurd concept and turn it into a real, viable product. So we decided to target late-night impulse buying with a microservices-backed AI circuit breaker.
-> 🛠️ **How it works (and what we're building):**
-> 1. It evaluates your current mood, timing, and spending context to calculate your odds of 48-hour buyer's remorse in under 300ms.
-> 2. If you're in high-risk "goblin mode," it flips into a 3-card psychological Tarot reading to help you figure out *why* you're actually trying to spend money right now (usually workplace fatigue or boredom).
-> 
-> 
-> We wired up the core AI pipeline using FastAPI, LangChain, Groq (Llama 3.3 70B), and Spring Cloud over the weekend, and we're currently actively developing the rest of the microservices stack and frontend.
-> Shoutout to ProgSoC for the awesome launchpad, and to my teammates [@Teammate 1] and [@Teammate 2] for building this with me.
-> More updates coming soon as we keep building! 🔮
-
----
-
-## 📄 Updated `README.md` File
-
 ```markdown
 # 🔮 Regret Oracle
 
