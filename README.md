@@ -1,7 +1,9 @@
-```markdown
+
+---
+
 # 🔮 Regret Oracle
 
-> **🚧 Project Status: Active Development**  
+> **🚧 Project Status: Active Development**
 > *Conceived at the UTS ProgSoC Hackathon (Theme: Turning Absurd Ideas into Viable Startup Concepts) and currently under active build.*
 
 An AI-powered decision circuit-breaker that predicts 48-hour post-choice remorse and provides psychological reframing before impulse decisions cause financial or emotional harm.
@@ -12,12 +14,12 @@ An AI-powered decision circuit-breaker that predicts 48-hour post-choice remorse
 
 This project is an **ongoing build**. The core AI inference engine and prompt chains are functional, while additional microservices and integrations are currently in active development.
 
-- [x] **Core AI Engine:** FastAPI + LangChain + Groq sub-300ms inference
-- [x] **Pydantic Schemas:** Calibrated regret score & 3-card Tarot reader outputs
-- [x] **Psychological Profiling:** 12-question diagnostic model implementation
-- [ ] **Spring Cloud Infrastructure:** Ongoing service gateway & JWT auth integration
-- [ ] **Chrome Extension:** In development (auto-intercept checkout pages past 11 PM)
-- [ ] **48-Hour Feedback Loop:** Planned telemetry to continuously refine user profiles
+* [x] **Core AI Engine:** FastAPI + LangChain + Groq sub-300ms inference
+* [x] **Pydantic Schemas:** Calibrated regret score & 3-card Tarot reader outputs
+* [x] **Psychological Profiling:** 12-question diagnostic model implementation
+* [ ] **Spring Cloud Infrastructure:** Service gateway & JWT auth integration
+* [ ] **Chrome Extension:** Auto-intercept checkout pages past 11 PM
+* [ ] **48-Hour Feedback Loop:** Telemetry to continuously refine user profiles
 
 ---
 
@@ -26,6 +28,7 @@ This project is an **ongoing build**. The core AI inference engine and prompt ch
 Late-night fatigue and emotional stress drastically impair prefrontal cortex function, leading to impulse purchases and reactive commitments. Standard warnings like *"Are you sure?"* fail 95% of the time because they lack emotional context.
 
 **Regret Oracle** intercepts decisions in real time by:
+
 1. **Psychological Profiling:** Mapping user decision traits (Maximizing, Impulsivity, Rumination, Loss Aversion, Locus of Control).
 2. **Contextual Regret Calculation:** Synthesizing current state (timing, stress, stakes) to generate a calibrated **0–100% 48-hour regret score** in under 300ms.
 3. **Reflective Tarot Pacifier:** Using Jungian archetype mechanics as a cognitive mirror to reframe urges and address root emotional drivers.
@@ -36,28 +39,13 @@ Late-night fatigue and emotional stress drastically impair prefrontal cortex fun
 
 The platform is designed as a hybrid microservices architecture combining a **Spring Cloud** backend infrastructure with a high-throughput **FastAPI + LangChain** AI inference pipeline.
 
-```text
-                  +-----------------------+
-                  |    Frontend (Client)  |
-                  +-----------+-----------+
-                              |
-                     +--------v--------+
-                     |   API Gateway   |  (Spring Cloud Gateway - WIP)
-                     +--------+--------+
-                              |
-          +-------------------+-------------------+
-          |                                       |
-+---------v----------+                 +----------v----------+
-|   Auth Service     |                 |   Regret Service    | (User History & DB - WIP)
-+--------------------+                 +----------+----------+
-                                                  |
-                                       +----------v----------+
-                                       | Python Chain Svc    | (FastAPI + LangChain - ACTIVE)
-                                       +----------+----------+
-                                                  |
-                                       +----------v----------+
-                                       |   Groq / Llama 3.3  | (Sub-300ms Inference)
-                                       +---------------------+
+```mermaid
+graph TD
+    Client[Frontend Client] --> Gateway[API Gateway - Spring Cloud]
+    Gateway --> Auth[Auth Service - JWT]
+    Gateway --> Regret[Regret Service - DB & History]
+    Regret --> PyChain[Python Chain Service - FastAPI + LangChain]
+    PyChain --> Groq[Groq LPU - Llama 3.3 70B]
 
 ```
 
@@ -76,17 +64,17 @@ The platform is designed as a hybrid microservices architecture combining a **Sp
 ## 📁 Repository Structure
 
 ```text
-├── agent/                  # Autonomous decision agent logic (WIP)
-├── api-gateway/            # Spring Cloud Gateway routing (WIP)
-├── auth-service/           # User authentication & JWT management (WIP)
-├── eureka-server/          # Service discovery registry (WIP)
-├── frontend/              # Client dashboard & UI components (WIP)
+├── agent/                  # Autonomous decision agent logic
+├── api-gateway/            # Spring Cloud Gateway routing & rate limiting
+├── auth-service/           # User authentication & JWT management
+├── eureka-server/          # Service discovery registry
+├── frontend/              # Client dashboard & UI components
 ├── python-chain-service/   # FastAPI + LangChain microservice (ACTIVE)
 │   ├── main.py             # Route handlers & endpoints
 │   ├── chains/             # LangChain prompts & output parsers
 │   ├── models/             # Pydantic schema definitions
 │   └── services/           # Deterministic Tarot deck engine
-├── regret-service/         # Primary business logic & data persistence (WIP)
+├── regret-service/         # Primary business logic & data persistence
 └── docker-compose.yml      # Local environment orchestration
 
 ```
